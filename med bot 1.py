@@ -2,7 +2,7 @@
 from openai import OpenAI
 
 client = OpenAI(
-    api_key="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")
+    api_key="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")
 
 # Safety helpers
 
@@ -142,3 +142,4 @@ if __name__ == "__main__":
             continue
 
         print(chat_with_medical_bot(user_input))
+
