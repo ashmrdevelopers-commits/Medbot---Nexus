@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Health Dashboard - Template</title>
+
+<!-- Google font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--violet:#6a11cb;
+--midblue:#5b86e5;
+--sky:#67d0ff;
+--glass-bg: rgba(255,255,255,0.08);
+--glass-outline: rgba(255,255,255,0.12);
+--text: rgba(255,255,255,0.95);
+--muted: rgba(255,255,255,0.8);
+--card-shadow: 0 6px 18px rgba(9,10,21,0.25);
+--accent: #8be7ff;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+margin:0;
+font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+-webkit-font-smoothing:antialiased;
+background: linear-gradient(135deg, var(--violet) 0%, var(--midblue) 45%, var(--sky) 100%);
+color:var(--text);
+min-height:100vh;
+display:flex;
+flex-direction:column;
+gap:24px;
+padding:32px;
+}
+
+/* Top nav */
+header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:16px;
+width:100%;
+max-width:1200px;
+margin-inline:auto;
+background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+border:1px solid var(--glass-outline);
+padding:14px 18px;
+border-radius:12px;
+box-shadow:var(--card-shadow);
+backdrop-filter: blur(8px);
+}
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+}
+.logo{
+width:44px;
+height:44px;
+border-radius:10px;
+display:grid;
+place-items:center;
+font-weight:700;
+color:var(--violet);
+background:linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+nav a{
+color:var(--muted);
+margin-left:14px;
+text-decoration:none;
+font-weight:600;
+}
+nav a.primary{
+background:rgba(255,255,255,0.08);
+padding:8px 12px;
+border-radius:8px;
+color:var(--text);
+}
+
+/* Main container */
+.container{
+width:100%;
+max-width:1200px;
+margin-inline:auto;
+display:grid;
+grid-template-columns: 1fr 480px;
+gap:22px;
+align-items:start;
+}
+
+/* Left: dashboard */
+.dashboard{
+background:var(--glass-bg);
+border:1px solid var(--glass-outline);
+border-radius:14px;
+padding:20px;
+box-shadow:var(--card-shadow);
+backdrop-filter: blur(10px);
+}
+.hero{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:18px;
+}
+.hero .title{
+font-size:20px;
+font-weight:700;
+}
+.hero p{margin:6px 0 0; color:var(--muted); font-size:14px}
+
+.reminders{
+margin-top:18px;
+display:grid;
+gap:12px;
+}
+
+.reminder-card{
+display:flex;
+gap:12px;
+align-items:center;
+padding:12px;
+border-radius:10px;
+background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+border:1px solid rgba(255,255,255,0.04);
+}
+.reminder-dot{
+width:12px;
+height:12px;
+border-radius:50%;
+background:var(--accent);
+box-shadow:0 2px 8px rgba(107,218,255,0.2);
+}
+.reminder-body{flex:1}
+.reminder-time{font-size:13px;color:var(--muted)}
+.reminder-title{font-weight:600}
+
+.add-reminder{
+margin-top:14px;
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+}
+.add-reminder input[type="text"]{
+flex:1;
+min-width:160px;
+padding:10px 12px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.06);
+background:transparent;
+color:var(--text);
+outline:none;
+}
+.btn{
+background:linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+border:1px solid rgba(255,255,255,0.06);
+color:var(--text);
+padding:10px 12px;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+}
+.btn.secondary{
+background:transparent;
+color:var(--muted);
+border:1px dashed rgba(255,255,255,0.04);
+}
+
+/* Right: new website / preview area */
+.preview{
+background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+border-radius:14px;
+border:1px solid var(--glass-outline);
+padding:16px;
+height:fit-content;
+box-shadow:var(--card-shadow);
+backdrop-filter: blur(8px);
+}
+.preview h3{margin:0 0 10px 0}
+.new-site{
+min-height:320px;
+border-radius:10px;
+border:1px dashed rgba(255,255,255,0.06);
+display:flex;
+align-items:center;
+justify-content:center;
+color:var(--muted);
+background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+padding:12px;
+}
+.new-site.empty::after{
+content:"NEW WEBSITE / EMBED AREA (placeholder)";
+font-size:14px;
+opacity:0.9;
+}
+
+/* floating chatbot placeholder */
+.chatbot-floating{
+position:fixed;
+right:26px;
+bottom:26px;
+width:360px;
+max-width:calc(100% - 56px);
+border-radius:12px;
+overflow:hidden;
+border:1px solid rgba(255,255,255,0.08);
+background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+box-shadow:0 12px 40px rgba(0,0,0,0.35);
+backdrop-filter: blur(10px);
+}
+.chat-header{
+display:flex;
+align-items:center;
+gap:10px;
+padding:10px 12px;
+background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.chat-title{font-weight:700}
+.chat-body{
+min-height:160px;
+padding:12px;
+color:var(--muted);
+font-size:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+.chat-body.empty::after{
+content:"Chatbot placeholder — embed your chatbot script or iframe here.";
+text-align:center;
+opacity:0.9;
+}
+
+footer{
+margin-top:auto;
+width:100%;
+max-width:1200px;
+margin-inline:auto;
+color:var(--muted);
+font-size:13px;
+text-align:center;
+padding:12px;
+}
+
+/* Responsive */
+@media (max-width:980px){
+.container{ grid-template-columns: 1fr; }
+.chatbot-floating{ right:14px; left:14px; width:auto; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="brand">
+<div class="logo">H</div>
+<div>
+<div style="font-weight:700">HealthSuite</div>
+<div style="font-size:12px; color:var(--muted)">Care reminders • Monitoring • Integrations</div>
+</div>
+</div>
+
+<nav>
+<a href="#">Overview</a>
+<a href="#">Reminders</a>
+<a href="#">Reports</a>
+<a href="#" class="primary">New Site / Embed</a>
+</nav>
+</header>
+
+<main class="container">
+<!-- Left: Health dashboard and reminders -->
+<section class="dashboard" aria-label="health dashboard">
+<div class="hero">
+<div>
+<div class="title">Health Reminders</div>
+<p>Keep track of meds, exercises, appointments and critical daily prompts.</p>
+</div>
+<div style="text-align:right;">
+<div style="font-weight:700">Today</div>
+<div style="color:var(--muted); font-size:13px">Auto-sync: Off</div>
+</div>
+</div>
+
+<div class="reminders" id="reminderList">
+<!-- Example reminders. You can remove method below to start blank -->
+<div class="reminder-card">
+<div class="reminder-dot"></div>
+<div class="reminder-body">
+<div class="reminder-title">Take blood pressure med</div>
+<div class="reminder-time">08:00 AM • Daily</div>
+</div>
+<div style="font-size:13px;color:var(--muted)">Active</div>
+</div>
+
+<div class="reminder-card">
+<div class="reminder-dot" style="background:#ffd18c"></div>
+<div class="reminder-body">
+<div class="reminder-title">Evening walk</div>
+<div class="reminder-time">06:30 PM • 30 min</div>
+</div>
+<div style="font-size:13px;color:var(--muted)">Upcoming</div>
+</div>
+</div>
+
+<!-- Simple add reminder UI (non-persistent) -->
+<div class="add-reminder" aria-hidden="false">
+<input type="text" id="reminderText" placeholder="Reminder title (e.g., Take insulin)" />
+<input type="text" id="reminderTime" placeholder="Time or schedule (e.g., 07:30 AM)" style="width:160px"/>
+<button class="btn" id="addReminderBtn">Add</button>
+<button class="btn secondary" id="clearRemindersBtn">Clear</button>
+</div>
+</section>
+
+<!-- Right: New website / embed area placeholder -->
+<aside class="preview" aria-label="new website preview">
+<h3>New Website / Embed Area</h3>
+<p style="margin:0 0 12px 0; color:var(--muted); font-size:13px;">
+This space is intentionally left to host your new website or a widget (health tools, appointment page, full app).
+</p>
+
+<div id="newSite" class="new-site empty" role="region" aria-label="New website placeholder">
+<!-- This is a placeholder. To embed another site or app:
+Option A: Replace this div with an iframe: <iframe src="https://your-site.com" style="width:100%;height:100%;border:0;border-radius:8px"></iframe>
+Option B: Insert your app's HTML or widget script here.
+-->
+</div>
+
+<div style="margin-top:12px; display:flex; gap:8px;">
+<button class="btn" id="embedDemo">Embed demo page</button>
+<button class="btn secondary" id="resetEmbed">Reset placeholder</button>
+</div>
+</aside>
+</main>
+
+<!-- Floating Chatbot placeholder (bottom-right) -->
+<div class="chatbot-floating" aria-label="Chatbot placeholder">
+<div class="chat-header">
+<div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(90deg,var(--sky),var(--midblue));display:grid;place-items:center;color:#022">AI</div>
+<div>
+<div class="chat-title">Chatbot</div>
+<div style="font-size:12px;color:var(--muted)">Placeholder panel — integrate your bot here</div>
+</div>
+</div>
+<div class="chat-body empty" id="chatbotArea">
+<!-- Chatbot UI should be mounted here.
+To embed a chatbot widget: include the vendor script and set the container to #chatbotArea,
+or insert an iframe: <iframe src="https://your-chatbot.com/widget" style="width:100%;height:100%;border:0"></iframe>
+-->
+</div>
+</div>
+
+<footer>
+Template &copy; <span id="year"></span> HealthSuite — Professional UI with violet/light-blue gradient. Designed to be extended.
+</footer>
+
+<script>
+// Small scripts demonstrating the placeholders and allowing quick demo actions.
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Add reminder action (non-persistent)
+const addBtn = document.getElementById('addReminderBtn');
+const clearBtn = document.getElementById('clearRemindersBtn');
+const list = document.getElementById('reminderList');
+
+addBtn.addEventListener('click', () => {
+const title = document.getElementById('reminderText').value.trim();
+const time = document.getElementById('reminderTime').value.trim();
+if(!title) return alert('Enter a reminder title.');
+const card = document.createElement('div');
+card.className = 'reminder-card';
+card.innerHTML = `
+<div class="reminder-dot"></div>
+<div class="reminder-body">
+<div class="reminder-title">${escapeHtml(title)}</div>
+<div class="reminder-time">${escapeHtml(time || 'No time')}</div>
+</div>
+<div style="font-size:13px;color:var(--muted)">Planned</div>
+`;
+list.prepend(card);
+document.getElementById('reminderText').value = '';
+document.getElementById('reminderTime').value = '';
+});
+
+clearBtn.addEventListener('click', () => {
+if(!confirm('Clear all reminders?')) return;
+list.innerHTML = '';
+});
+
+// Embed demo page into new-site placeholder
+const embedDemoBtn = document.getElementById('embedDemo');
+const resetEmbedBtn = document.getElementById('resetEmbed');
+const newSite = document.getElementById('newSite');
+
+embedDemoBtn.addEventListener('click', () => {
+// Example: insert a small demo page via iframe (you can change src)
+newSite.classList.remove('empty');
+newSite.innerHTML = '';
+const iframe = document.createElement('iframe');
+iframe.style.width = '100%';
+iframe.style.height = '360px';
+iframe.style.border = '0';
+iframe.style.borderRadius = '8px';
+// Use a data URL to keep everything local — a tiny demo HTML
+const demoHtml = encodeURIComponent(`
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>body{font-family:Inter, Arial;display:flex;align-items:center;justify-content:center;height:100%;margin:0;background:linear-gradient(180deg,#fff,#f7fbff);color:#134;}</style>
+</head><body><div style="text-align:center;padding:24px"><h2>Embedded Health Tool</h2><p style="color:#146">This is an embedded demo. Replace iframe src with your real page.</p></div></body></html>
+`);
+iframe.src = 'data:text/html;charset=utf-8,' + demoHtml;
+newSite.appendChild(iframe);
+});
+
+resetEmbedBtn.addEventListener('click', () => {
+newSite.classList.add('empty');
+newSite.innerHTML = '';
+});
+
+// Small helper to avoid injection
+function escapeHtml(str){
+return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// NOTES for integration (not active code):
+// - To integrate a chatbot provider: paste their script inside <head> or before closing </body>, then configure it to mount at #chatbotArea.
+// - Or embed via iframe:
+// const iframe = document.createElement('iframe');
+// iframe.src = 'https://your-chatbot.example/widget';
+// iframe.style.width = '100%';
+// iframe.style.height = '100%';
+// iframe.style.border = '0';
+// document.getElementById('chatbotArea').appendChild(iframe);
+</script>
+</body>
+</html>
